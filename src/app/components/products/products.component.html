@@ -4,11 +4,17 @@
       <button (click)="getAllProducts()" class="btn btn-outline-info ml-2">All</button>
     </li>
     <li>
-      <button class="btn btn-outline-info ml-2">Selected</button>
+      <button (click)="getSelectedProducts()" class="btn btn-outline-info ml-2">Selected</button>
     </li>
     <li>
-      <button class="btn btn-outline-info ml-2">Available</button>
+      <button (click)="getAvalaibleProducts()" class="btn btn-outline-info ml-2">Available</button>
     </li>
+  </ul>
+  <ul class="navbar navbar-nav ml-auto">
+    <form #f="ngForm" (ngSubmit)="onSearch(f.value)" class="form-inline">
+        <input ngModel name="keyword"  type="text">
+        <button class="btn btn-sm btn-outline-info ml-2"><span class="fa fa-search"></span></button>
+    </form>
   </ul>
 </nav>
 
@@ -33,6 +39,18 @@
         <td>{{p.quantity}}</td>
         <td>{{p.selected}}</td>
         <td>{{p.available}}</td>
+        <td>
+          <button (click)="onSelect(p)" [ngClass]="p.selected?'btn-danger':'btn-success'" class="btn btn-sm">
+            <span *ngIf="p.selected">Unselect</span>
+            <span *ngIf="!p.selected">Select</span>
+          </button>
+        </td>
+        <td>
+          <button (click)="onDelete(p)" class="btn btn-danger">
+            <span class="fa fa-trash-o"></span>
+
+          </button>
+        </td>
       </tr>
     </table>
   </ng-container>

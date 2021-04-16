@@ -13,4 +13,14 @@ export class ProductsService {
     let host=environment.host;
     return this.http.get<Product[]>(host+"/products");
   }
+
+  getSelectedProducts(): Observable<Product[]>{
+    let host=environment.host;
+    return this.http.get<Product[]>(host+"/products?selected=true");
+  }
+
+  getAvalaibleProducts(): Observable<Product[]>{
+    let host=environment.host;
+    return this.http.get<Product[]>(host+"/products?available=true");
+  }
 }

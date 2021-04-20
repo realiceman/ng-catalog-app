@@ -13,7 +13,7 @@
       "name": "printer",
       "price": 230,
       "quantity": 1500,
-      "selected": false,
+      "selected": true,
       "available": true
     },
     {
@@ -23,6 +23,14 @@
       "quantity": 600,
       "selected": true,
       "available": false
+    },
+    {
+      "name": "test1",
+      "price": "2021",
+      "quantity": "1330",
+      "selected": true,
+      "available": false,
+      "id": 4
     }
   ]
 }

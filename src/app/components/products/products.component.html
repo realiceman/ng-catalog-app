@@ -9,6 +9,9 @@
     <li>
       <button (click)="getAvalaibleProducts()" class="btn btn-outline-info ml-2">Available</button>
     </li>
+    <li>
+      <button (click)="onNewProduct()" class="btn btn-outline-info ml-2">New</button>
+    </li>
   </ul>
   <ul class="navbar navbar-nav ml-auto">
     <form #f="ngForm" (ngSubmit)="onSearch(f.value)" class="form-inline">
@@ -48,6 +51,12 @@
         <td>
           <button (click)="onDelete(p)" class="btn btn-danger">
             <span class="fa fa-trash-o"></span>
+
+          </button>
+        </td>
+        <td>
+          <button (click)="onUpdate(p)" class="btn btn-danger">
+            <span class="fa fa-edit"></span>
 
           </button>
         </td>

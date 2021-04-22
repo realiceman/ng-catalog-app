@@ -46,7 +46,6 @@ export class ProductsService {
   }
 
   updateProduct(product: Product, productId: number | undefined) {
-    console.log(product, productId)
     return this.http.put<Product>(host+"/products/"+productId, product);
   }
 }

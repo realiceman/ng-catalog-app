@@ -12,7 +12,7 @@ import { ProductAddComponent } from './components/product-add/product-add.compon
 import { ProductEditComponent } from './components/product-edit/product-edit.component';
 import { ProductsNavbarComponent } from './components/products/products-navbar/products-navbar.component';
 import { ProductsListComponent } from './components/products/products-list/products-list.component';
-import { ProductItemComponent } from './components/products/product-item/product-item.component';
+import { ProductItemComponent } from './components/products/products-list/product-item/product-item.component';
 
 @NgModule({
   declarations: [

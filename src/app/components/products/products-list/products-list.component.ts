@@ -31,4 +31,8 @@ export class ProductsListComponent implements OnInit {
   onUpdate(p: Product) {
     this.productEvenEmitter.emit({type: ProductActionTypes.EDIT_PRODUCT, payload: p})
   }
+
+  onActionEvent($event: ActionEvent) {
+    this.productEvenEmitter.emit($event);
+  }
 }

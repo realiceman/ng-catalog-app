@@ -25,10 +25,10 @@
       "available": false
     },
     {
-      "name": "test1",
-      "price": "2021",
-      "quantity": "1330",
-      "selected": true,
+      "name": "test2",
+      "price": "101",
+      "quantity": "20",
+      "selected": false,
       "available": false,
       "id": 4
     }

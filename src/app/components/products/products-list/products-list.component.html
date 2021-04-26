@@ -12,32 +12,14 @@
       <tr>
         <th>ID</th><th>Name</th><th>Price</th><th>Quantity</th><th>Selected</th><th>Available</th>
       </tr>
-      <tr *ngFor="let p of result.data">
-        <td>{{p.id}}</td>
-        <td>{{p.name}}</td>
-        <td>{{p.price}}</td>
-        <td>{{p.quantity}}</td>
-        <td>{{p.selected}}</td>
-        <td>{{p.available}}</td>
-        <td>
-          <button (click)="onSelect(p)" [ngClass]="p.selected?'btn-danger':'btn-success'" class="btn btn-sm">
-            <span *ngIf="p.selected">Unselect</span>
-            <span *ngIf="!p.selected">Select</span>
-          </button>
-        </td>
-        <td>
-          <button (click)="onDelete(p)" class="btn btn-danger">
-            <span class="fa fa-trash-o"></span>
+      <app-product-item [product]="p"
+                        (evenEmitter)="onActionEvent($event)"
+                        *ngFor="let p of result.data"
+                        style="display: contents">
 
-          </button>
-        </td>
-        <td>
-          <button (click)="onUpdate(p)" class="btn btn-danger">
-            <span class="fa fa-edit"></span>
+      </app-product-item>
 
-          </button>
-        </td>
-      </tr>
+
     </table>
   </ng-container>
 

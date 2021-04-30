@@ -22,13 +22,13 @@
       "price": 1230,
       "quantity": 600,
       "selected": true,
-      "available": false
+      "available": true
     },
     {
       "name": "test2",
       "price": "101",
       "quantity": "20",
-      "selected": false,
+      "selected": true,
       "available": false,
       "id": 4
     },
@@ -39,6 +39,14 @@
       "selected": true,
       "available": false,
       "id": 5
+    },
+    {
+      "name": "toto",
+      "price": "2",
+      "quantity": "1",
+      "selected": true,
+      "available": true,
+      "id": 6
     }
   ]
 }

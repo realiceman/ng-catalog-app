@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProductsService} from "../../services/products.services";
 import {EventDrivenServices} from "../../services/event.driven.services";
-import {ProductActionTypes} from "../../state/product.state";
+import {ModifyProductActionTypes} from "../../state/product.state";
 
 @Component({
   selector: 'app-product-add',
@@ -41,7 +41,7 @@ export class ProductAddComponent implements OnInit {
     if(this.productFormGroup.invalid) return;
     this.productService.saveProduct(this.productFormGroup.value)
       .subscribe(data=>{
-        this.eds.publishEvent({type: ProductActionTypes.PRODUCT_ADDED});
+        this.eds.publishModifyEvent({type: ModifyProductActionTypes.PRODUCT_ADDED});
         alert("success")
       });
   }

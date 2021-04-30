@@ -1,19 +1,19 @@
 {
   "products": [
     {
-      "id": 1,
       "name": "computer",
       "price": 2000,
       "quantity": 300,
-      "selected": false,
-      "available": false
+      "selected": true,
+      "available": false,
+      "id": 1
     },
     {
       "id": 2,
       "name": "printer",
       "price": 230,
       "quantity": 1500,
-      "selected": true,
+      "selected": false,
       "available": true
     },
     {
@@ -28,7 +28,7 @@
       "name": "test2",
       "price": "101",
       "quantity": "20",
-      "selected": true,
+      "selected": false,
       "available": false,
       "id": 4
     },
@@ -47,6 +47,14 @@
       "selected": true,
       "available": true,
       "id": 6
+    },
+    {
+      "name": "ssss",
+      "price": "111",
+      "quantity": "2220",
+      "selected": false,
+      "available": false,
+      "id": 7
     }
   ]
 }

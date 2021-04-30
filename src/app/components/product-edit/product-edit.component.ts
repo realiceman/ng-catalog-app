@@ -4,7 +4,7 @@ import {ProductsService} from "../../services/products.services";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Product} from "../../Models/product.model";
 import {EventDrivenServices} from "../../services/event.driven.services";
-import {ProductActionTypes} from "../../state/product.state";
+import {ModifyProductActionTypes} from "../../state/product.state";
 
 @Component({
   selector: 'app-product-edit',
@@ -47,7 +47,7 @@ export class ProductEditComponent implements OnInit {
     console.log(this.productId)
     this.productService.updateProduct(this.productFormGroup.value, this.productId)
       .subscribe(product=>{
-        this.eds.publishEvent({type: ProductActionTypes.PRODUCT_UPDATED});
+        this.eds.publishModifyEvent({type: ModifyProductActionTypes.EDIT_PRODUCT});
          alert("success");
       });
   }

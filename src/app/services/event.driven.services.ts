@@ -1,16 +1,20 @@
 import {Injectable} from "@angular/core";
 import {Subject} from "rxjs";
-import {ActionEvent} from "../state/product.state";
+import {ActionModifyEvent, ActionQueryEvent} from "../state/product.state";
 
 @Injectable({providedIn:"root"})
 export class EventDrivenServices {
-  sourceEventSubject: Subject<ActionEvent>=new Subject<ActionEvent>();
-  sourceEventSubjectObservable=this.sourceEventSubject.asObservable();
+  sourceModifyEventSubject: Subject<ActionModifyEvent>=new Subject<ActionModifyEvent>();
+  sourceModifyEventSubjectObservable=this.sourceModifyEventSubject.asObservable();
 
-  sourceEventSubject2: Subject<ActionEvent>=new Subject<ActionEvent>();
-  sourceEventSubjectObservable2=this.sourceEventSubject.asObservable();
+  sourceQueryEventSubject: Subject<ActionQueryEvent>=new Subject<ActionQueryEvent>();
+  sourceQueryEventSubjectObservable=this.sourceQueryEventSubject.asObservable();
 
-  publishEvent(event:ActionEvent){
-    this.sourceEventSubject.next(event);
+  publishModifyEvent(event:ActionModifyEvent){
+    this.sourceModifyEventSubject.next(event);
+  }
+
+  publishQueryEvent(event:ActionQueryEvent){
+    this.sourceQueryEventSubject.next(event);
   }
 }

@@ -3,8 +3,11 @@ import {ProductsService} from "../../services/products.services";
 import {Product} from "../../Models/product.model";
 import {Observable, of} from "rxjs";
 import {catchError, map, startWith} from "rxjs/operators";
-import {ActionEvent, AppDataState, DataStateEnum, ProductActionTypes} from "../../state/product.state";
-import {dashCaseToCamelCase} from "@angular/compiler/src/util";
+import {
+  ActionModifyEvent, ActionQueryEvent,
+  AppDataState,
+  DataStateEnum, ModifyProductActionTypes, QueryProductActionTypes
+} from "../../state/product.state";
 import {Router} from "@angular/router";
 import {EventDrivenServices} from "../../services/event.driven.services";
 
@@ -23,8 +26,11 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllProducts();
-    this.eds.sourceEventSubjectObservable.subscribe((actionEvent:ActionEvent)=>{
-      this.onActionEvent(actionEvent)
+    this.eds.sourceModifyEventSubjectObservable.subscribe((actionEvent:ActionModifyEvent)=>{
+      this.onModifyActionEvent(actionEvent)
+    });
+    this.eds.sourceQueryEventSubjectObservable.subscribe((actionEvent:ActionQueryEvent)=>{
+      this.onQueryActionEvent(actionEvent)
     });
   }
 
@@ -89,16 +95,20 @@ export class ProductsComponent implements OnInit {
     this.router.navigateByUrl("editProduct/"+p.id);
   }
 
-  onActionEvent($event: ActionEvent) {
+  onModifyActionEvent($event: ActionModifyEvent) {
     switch ($event.type){
-      case ProductActionTypes.GET_ALL_PRODS: this.getAllProducts(); break;
-      case ProductActionTypes.GET_SEL_PRODS: this.getSelectedProducts(); break;
-      case ProductActionTypes.GET_AVA_PRODS: this.getAvalaibleProducts(); break;
-      case ProductActionTypes.SEARCH_PRODS: this.onSearch($event.payload); break;
-      case ProductActionTypes.NEW_PRODUCT: this.onNewProduct(); break;
-      case ProductActionTypes.SELECT_PRODUCT: this.onSelect($event.payload); break;
-      case ProductActionTypes.EDIT_PRODUCT: this.onUpdate($event.payload); break;
-      case ProductActionTypes.DELETE_PRODUCT: this.onDelete($event.payload); break;
+      case ModifyProductActionTypes.NEW_PRODUCT: this.onNewProduct(); break;
+      case ModifyProductActionTypes.SELECT_PRODUCT: this.onSelect($event.payload); break;
+      case ModifyProductActionTypes.EDIT_PRODUCT: this.onUpdate($event.payload); break;
+      case ModifyProductActionTypes.DELETE_PRODUCT: this.onDelete($event.payload); break;
+    }
+  }
+  onQueryActionEvent($event: ActionQueryEvent) {
+    switch ($event.type){
+      case QueryProductActionTypes.GET_ALL_PRODS: this.getAllProducts(); break;
+      case QueryProductActionTypes.GET_SEL_PRODS: this.getSelectedProducts(); break;
+      case QueryProductActionTypes.GET_AVA_PRODS: this.getAvalaibleProducts(); break;
+      case QueryProductActionTypes.SEARCH_PRODS: this.onSearch($event.payload); break;
     }
   }
 }

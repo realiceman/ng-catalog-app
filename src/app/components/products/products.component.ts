@@ -6,6 +6,7 @@ import {catchError, map, startWith} from "rxjs/operators";
 import {ActionEvent, AppDataState, DataStateEnum, ProductActionTypes} from "../../state/product.state";
 import {dashCaseToCamelCase} from "@angular/compiler/src/util";
 import {Router} from "@angular/router";
+import {EventDrivenServices} from "../../services/event.driven.services";
 
 @Component({
   selector: 'app-products',
@@ -13,16 +14,21 @@ import {Router} from "@angular/router";
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  products$?: Observable<AppDataState<Product[]>>;
+  products$?: Observable<AppDataState<Product[]>>; //observable means you need to subscribe to get the datas if they come
   readonly DataStateEnum=DataStateEnum;
 
-  constructor(private productService: ProductsService, private router: Router) { }
+  constructor(private productService: ProductsService,
+              private router: Router,
+              private eds: EventDrivenServices) { }
 
   ngOnInit(): void {
     this.getAllProducts();
+    this.eds.sourceEventSubjectObservable.subscribe((actionEvent:ActionEvent)=>{
+      this.onActionEvent(actionEvent)
+    });
   }
 
-  getAllProducts() {
+  getAllProducts() { //observable means you need to subscribe to get the datas if they come // and the view subscribe with "| async"
     this.products$ =
       this.productService.getAllProducts().pipe(
         map(data=>({dataState:DataStateEnum.LOADED,data:data})),

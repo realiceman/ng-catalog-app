@@ -12,7 +12,7 @@ export class ProductsService {
   constructor(private http:HttpClient) {
   }
 
-  getAllProducts(): Observable<Product[]>{
+  getAllProducts(): Observable<Product[]>{ //this is the resource and if a function is interested by its data it needs to subscribe
     return this.http.get<Product[]>(host+"/products");
   }
 

@@ -6,6 +6,8 @@ import {catchError, map, startWith} from "rxjs/operators";
 import {ActionEvent, AppDataState, DataStateEnum, ProductActionTypes} from "../../state/product.state";
 import {dashCaseToCamelCase} from "@angular/compiler/src/util";
 import {Router} from "@angular/router";
+import {Store} from "@ngrx/store";
+import {ProductsState, ProductsStateEnum} from "../../ngrx/products.reducer";
 
 @Component({
   selector: 'app-products',
@@ -16,9 +18,14 @@ export class ProductsComponent implements OnInit {
   products$?: Observable<AppDataState<Product[]>>;
   readonly DataStateEnum=DataStateEnum;
 
-  constructor(private productService: ProductsService, private router: Router) { }
+  productState$: Observable<ProductsState>|null=null;
+  readonly ProductsStateEnum=ProductsStateEnum;
+  constructor(private productService: ProductsService, private router: Router, private store:Store<any>) { }
 
   ngOnInit(): void {
+    this.productState$=this.store.pipe(
+      map((state)=> state.prodsState)
+    );
     this.getAllProducts();
   }
 

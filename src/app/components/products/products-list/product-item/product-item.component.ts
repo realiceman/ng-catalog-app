@@ -10,7 +10,6 @@ import {ActionEvent, ProductActionTypes} from "../../../../state/product.state";
 export class ProductItemComponent implements OnInit {
 
   @Input() product?:Product;
-  @Output() evenEmitter:EventEmitter<ActionEvent>=new EventEmitter<ActionEvent>();
 
   constructor() { }
 
@@ -18,14 +17,14 @@ export class ProductItemComponent implements OnInit {
   }
 
   onSelect(product: Product) {
-    this.evenEmitter.emit({type: ProductActionTypes.SELECT_PRODUCT, payload:product});
+
   }
 
   onDelete(product: Product) {
-    this.evenEmitter.emit({type: ProductActionTypes.DELETE_PRODUCT, payload:product});
+
   }
 
   onUpdate(product: Product) {
-    this.evenEmitter.emit({type: ProductActionTypes.EDIT_PRODUCT, payload:product});
+
   }
 }

@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Observable} from "rxjs";
 import {ActionEvent, AppDataState, DataStateEnum, ProductActionTypes} from "../../../state/product.state";
 import {Product} from "../../../Models/product.model";
+import {ProductsState, ProductsStateEnum} from "../../../ngrx/products.reducer";
 
 @Component({
   selector: 'app-products-list',
@@ -10,29 +11,11 @@ import {Product} from "../../../Models/product.model";
 })
 export class ProductsListComponent implements OnInit {
 
-  @Input() productsInput$?: Observable<AppDataState<Product[]>>;
-  @Output() productEvenEmitter: EventEmitter<ActionEvent> = new EventEmitter<ActionEvent>();
-
-  readonly DataStateEnum=DataStateEnum;
+  @Input() productsState: ProductsState|null=null;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onSelect(p: Product) {
-    this.productEvenEmitter.emit({type: ProductActionTypes.SELECT_PRODUCT, payload: p})
-  }
-
-  onDelete(p: Product) {
-    this.productEvenEmitter.emit({type: ProductActionTypes.DELETE_PRODUCT, payload: p})
-  }
-
-  onUpdate(p: Product) {
-    this.productEvenEmitter.emit({type: ProductActionTypes.EDIT_PRODUCT, payload: p})
-  }
-
-  onActionEvent($event: ActionEvent) {
-    this.productEvenEmitter.emit($event);
-  }
 }

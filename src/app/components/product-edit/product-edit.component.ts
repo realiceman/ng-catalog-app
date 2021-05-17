@@ -45,6 +45,8 @@ export class ProductEditComponent implements OnInit {
 
   updateProduct() {
     console.log(this.productId)
+    this.submitted=true;
+    if(this.productFormGroup.invalid) return;
     this.productService.updateProduct(this.productFormGroup.value, this.productId)
       .subscribe(product=>{
         this.eds.publishModifyEvent({type: ModifyProductActionTypes.EDIT_PRODUCT});

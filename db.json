@@ -17,15 +17,15 @@
       "available": true
     },
     {
-      "id": 3,
-      "name": "Laptop",
+      "name": "printer",
       "price": 1230,
       "quantity": 600,
       "selected": true,
-      "available": true
+      "available": true,
+      "id": 3
     },
     {
-      "name": "test2",
+      "name": "mobile",
       "price": "101",
       "quantity": "20",
       "selected": false,

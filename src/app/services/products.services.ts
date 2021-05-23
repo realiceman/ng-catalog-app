@@ -29,8 +29,8 @@ export class ProductsService {
   }
 
   select(product: Product): Observable<Product> {
-    product.selected = !product.selected
-    return this.http.put<Product>(host + "/products/"+product.id, product);
+    console.log(`Before updating select state: Product is ${product}`)
+    return this.http.put<Product>(host + "/products/"+product.id, {...product,selected:!product.selected});
   }
 
   delete(product: Product): Observable<void> {

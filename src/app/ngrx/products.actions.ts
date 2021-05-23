@@ -16,7 +16,15 @@ export enum ProductActionTypes {
 
   SEARCH_PRODS = "[Product] Search Products",
   SEARCH_PRODS_SUCCESS = "[Product] Search Products Success",
-  SEARCH_PRODS_ERROR = "[Product] Search Products Error"
+  SEARCH_PRODS_ERROR = "[Product] Search Products Error",
+
+  ON_SEL_PROD = "[Product] On Select Product",
+  ON_SEL_PROD_SUCCESS = "[Product] On Select Product Success",
+  ON_SEL_PROD_ERROR = "[Product] On Select Product Error",
+
+  ON_DEL_PROD = "[Product] On Delete Product",
+  ON_DEL_PROD_SUCCESS = "[Product] On Delete Product Success",
+  ON_DEL_PROD_ERROR = "[Product] On Delete Product Error",
 }
 
 export class GetAllProductsAction implements Action {
@@ -104,7 +112,55 @@ export class SearchProductsErrorAction implements Action {
   }
 }
 
+
+export class OnSelectProductAction implements Action {
+  type: ProductActionTypes = ProductActionTypes.ON_SEL_PROD;
+
+  constructor(public payload: Product) {
+  }
+}
+
+export class OnSelectProductSuccessAction implements Action {
+  type: ProductActionTypes = ProductActionTypes.ON_SEL_PROD_SUCCESS;
+
+  constructor(public payload: Product) {
+  }
+}
+
+export class OnSelectProductErrorAction implements Action {
+  type: ProductActionTypes = ProductActionTypes.ON_SEL_PROD_ERROR;
+
+  constructor(public payload: string) {
+  }
+}
+
+
+export class OnDeleteProductAction implements Action {
+  type: ProductActionTypes = ProductActionTypes.ON_DEL_PROD;
+
+  constructor(public payload: Product) {
+  }
+}
+
+export class OnDeleteProductSuccessAction implements Action {
+  type: ProductActionTypes = ProductActionTypes.ON_DEL_PROD_SUCCESS;
+
+  constructor(public payload: Product) {
+  }
+}
+
+export class OnDeleteProductErrorAction implements Action {
+  type: ProductActionTypes = ProductActionTypes.ON_DEL_PROD_ERROR;
+
+  constructor(public payload: string) {
+  }
+}
+
+
+
 export type ProductsActions = GetAllProductsAction | GetAllProductsSuccessAction | GetAllProductsErrorAction |
   GetSelProductsAction | GetSelProductsSuccessAction | GetSelProductsErrorAction |
   GetAvaProductsAction | GetAvaProductsSuccessAction | GetAvaProductsErrorAction |
-  SearchProductsAction | SearchProductsSuccessAction | SearchProductsErrorAction;
+  SearchProductsAction | SearchProductsSuccessAction | SearchProductsErrorAction |
+  OnSelectProductAction | OnSelectProductSuccessAction | OnSelectProductErrorAction |
+  OnDeleteProductAction | OnDeleteProductSuccessAction | OnDeleteProductErrorAction;

@@ -7,6 +7,7 @@ import {
   GetSelProductsAction,
   SearchProductsAction
 } from "../../../ngrx/products.actions";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-products-navbar',
@@ -17,7 +18,7 @@ export class ProductsNavbarComponent implements OnInit {
 
   @Output() productEventEmitter: EventEmitter<ActionEvent> = new EventEmitter();
 
-  constructor(private store:Store<any>) { }
+  constructor(private store:Store<any>, private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -35,7 +36,7 @@ export class ProductsNavbarComponent implements OnInit {
   }
 
   onNewProduct() {
-    this.productEventEmitter.emit({type: ProductActionTypes.NEW_PRODUCT});
+    this.router.navigateByUrl("/newProduct");
   }
 
   onSearch(dataForm: any) {

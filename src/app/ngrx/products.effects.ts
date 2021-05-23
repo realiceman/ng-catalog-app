@@ -5,11 +5,21 @@ import {Observable, of} from "rxjs";
 import {Action} from "@ngrx/store";
 import {
   GetAllProductsErrorAction,
-  GetAllProductsSuccessAction, GetAvaProductsErrorAction, GetAvaProductsSuccessAction, GetSelProductsErrorAction,
+  GetAllProductsSuccessAction,
+  GetAvaProductsErrorAction,
+  GetAvaProductsSuccessAction,
+  GetSelProductsErrorAction,
   GetSelProductsSuccessAction,
-  ProductActionTypes, ProductsActions, SearchProductsErrorAction, SearchProductsSuccessAction
+  OnDeleteProductErrorAction,
+  OnDeleteProductSuccessAction,
+  OnSelectProductErrorAction,
+  OnSelectProductSuccessAction,
+  ProductActionTypes,
+  ProductsActions,
+  SearchProductsErrorAction,
+  SearchProductsSuccessAction
 } from "./products.actions";
-import {catchError, map, mergeMap} from "rxjs/operators";
+import {catchError, map, mergeMap, tap} from "rxjs/operators";
 
 @Injectable()
 export class ProductsEffects {
@@ -64,6 +74,36 @@ export class ProductsEffects {
           .pipe(
             map((products)=> new SearchProductsSuccessAction(products)),
             catchError((error)=> of(new SearchProductsErrorAction(error.message)))
+          )
+      })
+    )
+  );
+
+
+  onSelectProductEffect:Observable<ProductsActions>=createEffect(
+    () => this.effectActions.pipe(
+      ofType(ProductActionTypes.ON_SEL_PROD),
+      mergeMap( (action:ProductsActions) =>{
+        return this.productsService.select(action.payload)
+          .pipe(
+            tap(product => console.log(product)),
+            map((product)=> new OnSelectProductSuccessAction(product)),
+            catchError((error)=> of(new OnSelectProductErrorAction(error.message)))
+          )
+      })
+    )
+  );
+
+
+  onDeleteProductEffect:Observable<ProductsActions>=createEffect(
+    () => this.effectActions.pipe(
+      ofType(ProductActionTypes.ON_DEL_PROD),
+      mergeMap( (action:ProductsActions) =>{
+        return this.productsService.delete(action.payload)
+          .pipe(
+            tap(product => console.log(product)),
+            map(()=> new OnDeleteProductSuccessAction(action.payload)),
+            catchError((error)=> of(new OnDeleteProductErrorAction(error.message)))
           )
       })
     )

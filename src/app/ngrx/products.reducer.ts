@@ -6,7 +6,9 @@ export enum ProductsStateEnum {
   LOADING = "Loading",
   LOADED = "Loaded",
   ERROR = "Error",
-  INITIAL = "Initial"
+  INITIAL = "Initial",
+  NEW = "New",
+  EDIT= "Edit"
 }
 
 export interface ProductsState {
@@ -84,7 +86,26 @@ export function productsReducer(state:ProductsState=initState, action: Action):P
       return {...state, dataState:ProductsStateEnum.LOADED, products:listProds}
     case ProductActionTypes.ON_DEL_PROD_ERROR:
       return {...state, dataState:ProductsStateEnum.ERROR, errorMessage:(<ProductsActions>action).payload}
-
+    /*
+   New product item
+   */
+    case ProductActionTypes.NEW_PROD:
+      return {...state, dataState:ProductsStateEnum.LOADING}
+    case ProductActionTypes.NEW_PROD_SUCCESS:
+      return {...state, dataState:ProductsStateEnum.NEW}
+    case ProductActionTypes.ON_DEL_PROD_ERROR:
+      return {...state, dataState:ProductsStateEnum.ERROR, errorMessage:(<ProductsActions>action).payload}
+    /*
+    Save new product item
+    */
+    case ProductActionTypes.SAVE_PROD:
+      return {...state, dataState:ProductsStateEnum.LOADING}
+    case ProductActionTypes.SAVE_PROD_SUCCESS:
+      let products=[...state.products];
+      products.push((<ProductsActions>action).payload);
+      return {...state, dataState:ProductsStateEnum.LOADED, products:products}
+    case ProductActionTypes.ON_DEL_PROD_ERROR:
+      return {...state, dataState:ProductsStateEnum.ERROR, errorMessage:(<ProductsActions>action).payload}
 
     default: return {...state}
   }

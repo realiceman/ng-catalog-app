@@ -9,13 +9,13 @@ import {
   GetAvaProductsErrorAction,
   GetAvaProductsSuccessAction,
   GetSelProductsErrorAction,
-  GetSelProductsSuccessAction,
+  GetSelProductsSuccessAction, NewProductSuccessAction,
   OnDeleteProductErrorAction,
   OnDeleteProductSuccessAction,
   OnSelectProductErrorAction,
   OnSelectProductSuccessAction,
   ProductActionTypes,
-  ProductsActions,
+  ProductsActions, SaveProductErrorAction, SaveProductSuccessAction,
   SearchProductsErrorAction,
   SearchProductsSuccessAction
 } from "./products.actions";
@@ -104,6 +104,29 @@ export class ProductsEffects {
             tap(product => console.log(product)),
             map(()=> new OnDeleteProductSuccessAction(action.payload)),
             catchError((error)=> of(new OnDeleteProductErrorAction(error.message)))
+          )
+      })
+    )
+  );
+
+  newProductEffect:Observable<ProductsActions>=createEffect(
+    () => this.effectActions.pipe(
+      ofType(ProductActionTypes.NEW_PROD),
+      map( (action:ProductsActions) =>{
+        return new NewProductSuccessAction({});
+      })
+    )
+  );
+
+  saveProductEffect:Observable<ProductsActions>=createEffect(
+    () => this.effectActions.pipe(
+      ofType(ProductActionTypes.SAVE_PROD),
+      mergeMap( (action:ProductsActions) =>{
+        return this.productsService.saveProduct(action.payload)
+          .pipe(
+            tap(product => console.log(product)),
+            map((product)=> new SaveProductSuccessAction(product)),
+            catchError((error)=> of(new SaveProductErrorAction(error.message)))
           )
       })
     )

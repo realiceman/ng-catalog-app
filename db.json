@@ -23,6 +23,22 @@
       "quantity": 600,
       "selected": false,
       "available": false
+    },
+    {
+      "name": "rox1",
+      "price": "1000",
+      "quantity": "10",
+      "selected": true,
+      "available": true,
+      "id": 4
+    },
+    {
+      "name": "ryo",
+      "price": "234",
+      "quantity": "23",
+      "selected": false,
+      "available": false,
+      "id": 5
     }
   ]
 }

@@ -2,7 +2,7 @@
   "products": [
     {
       "id": 1,
-      "name": "computer",
+      "name": "computer1",
       "price": 2000,
       "quantity": 300,
       "selected": true,
@@ -25,11 +25,11 @@
       "available": false
     },
     {
-      "name": "rox1",
+      "name": "rox2",
       "price": "1000",
-      "quantity": "10",
+      "quantity": "100",
       "selected": true,
-      "available": true,
+      "available": false,
       "id": 4
     },
     {

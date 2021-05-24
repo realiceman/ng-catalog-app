@@ -8,19 +8,22 @@ export enum ProductsStateEnum {
   ERROR = "Error",
   INITIAL = "Initial",
   NEW = "New",
-  EDIT= "Edit"
+  EDIT= "Edit",
+  UPDATED = "Updated"
 }
 
 export interface ProductsState {
   products: Product[],
   errorMessage: string,
-  dataState: ProductsStateEnum
+  dataState: ProductsStateEnum,
+  currentProduct: Product|null
 }
 
 const initState: ProductsState = {
   products: [],
   errorMessage: "",
-  dataState: ProductsStateEnum.INITIAL
+  dataState: ProductsStateEnum.INITIAL,
+  currentProduct: null
 }
 
 export function productsReducer(state:ProductsState=initState, action: Action):ProductsState{
@@ -105,6 +108,26 @@ export function productsReducer(state:ProductsState=initState, action: Action):P
       products.push((<ProductsActions>action).payload);
       return {...state, dataState:ProductsStateEnum.LOADED, products:products}
     case ProductActionTypes.ON_DEL_PROD_ERROR:
+      return {...state, dataState:ProductsStateEnum.ERROR, errorMessage:(<ProductsActions>action).payload}
+    /*
+    Edit new product item
+    */
+    case ProductActionTypes.EDIT_PROD:
+      return {...state, dataState:ProductsStateEnum.LOADING}
+    case ProductActionTypes.EDIT_PROD_SUCCESS:
+      return {...state, dataState:ProductsStateEnum.LOADED, currentProduct:(<ProductsActions>action).payload}
+    case ProductActionTypes.EDIT_PROD_ERROR:
+      return {...state, dataState:ProductsStateEnum.ERROR, errorMessage:(<ProductsActions>action).payload}
+    /*
+    Update new product item
+    */
+    case ProductActionTypes.UPDATE_PROD:
+      return {...state, dataState:ProductsStateEnum.LOADING}
+    case ProductActionTypes.UPDATE_PROD_SUCCESS:
+      let updatedProd:Product=(<ProductsActions>action).payload
+      let updatedDatas:Product[]=state.products.map(p=>(p.id==updatedProd.id)?updatedProd:p);
+      return {...state, dataState:ProductsStateEnum.UPDATED, products:updatedDatas}
+    case ProductActionTypes.UPDATE_PROD_ERROR:
       return {...state, dataState:ProductsStateEnum.ERROR, errorMessage:(<ProductsActions>action).payload}
 
     default: return {...state}

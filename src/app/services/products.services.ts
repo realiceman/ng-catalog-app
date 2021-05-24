@@ -45,7 +45,8 @@ export class ProductsService {
     return this.http.get<Product>(host+"/products/"+id);
   }
 
-  updateProduct(product: Product, productId: number | undefined) {
-    return this.http.put<Product>(host+"/products/"+productId, product);
+  updateProduct(product: Product) {
+    console.log("What prod="+JSON.stringify(product));
+    return this.http.put<Product>(host+"/products/"+product.id, product);
   }
 }

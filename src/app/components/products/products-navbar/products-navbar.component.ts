@@ -1,13 +1,13 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {ActionEvent, ProductActionTypes} from "../../../state/product.state";
 import {Store} from "@ngrx/store";
 import {
   GetAllProductsAction,
   GetAvaProductsAction,
-  GetSelProductsAction,
+  GetSelProductsAction, ProductActionTypes,
   SearchProductsAction
 } from "../../../ngrx/products.actions";
 import {Router} from "@angular/router";
+import {ProductsState} from "../../../ngrx/products.reducer";
 
 @Component({
   selector: 'app-products-navbar',
@@ -15,12 +15,15 @@ import {Router} from "@angular/router";
   styleUrls: ['./products-navbar.component.css']
 })
 export class ProductsNavbarComponent implements OnInit {
-
-  @Output() productEventEmitter: EventEmitter<ActionEvent> = new EventEmitter();
+ state:ProductsState|null=null;
+ readonly productActionTypes=ProductActionTypes;
 
   constructor(private store:Store<any>, private router:Router) { }
 
   ngOnInit(): void {
+    this.store.subscribe(state=>{
+      this.state=state.prodsState;
+    });
   }
 
   getAllProducts() {

@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Product} from "../../../../Models/product.model";
-import {ActionEvent, ProductActionTypes} from "../../../../state/product.state";
 import {Store} from "@ngrx/store";
 import {OnDeleteProductAction, OnSelectProductAction} from "../../../../ngrx/products.actions";
 import {Router} from "@angular/router";

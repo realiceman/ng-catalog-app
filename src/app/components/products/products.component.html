@@ -1,4 +1,4 @@
-<app-products-navbar (productEventEmitter)="onActionEvent($event)"></app-products-navbar>
+<app-products-navbar></app-products-navbar>
 
 
 <ng-container *ngIf="productState$ | async as state" [ngSwitch]="state.dataState">

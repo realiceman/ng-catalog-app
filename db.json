@@ -2,11 +2,11 @@
   "products": [
     {
       "id": 1,
-      "name": "computer1",
+      "name": "computer",
       "price": 2000,
       "quantity": 300,
       "selected": true,
-      "available": false
+      "available": true
     },
     {
       "id": 2,
@@ -39,6 +39,14 @@
       "selected": false,
       "available": false,
       "id": 5
+    },
+    {
+      "name": "111toto",
+      "price": "10",
+      "quantity": "10",
+      "selected": true,
+      "available": false,
+      "id": 6
     }
   ]
 }

@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Observable} from "rxjs";
-import {ActionEvent, AppDataState, DataStateEnum, ProductActionTypes} from "../../../state/product.state";
 import {Product} from "../../../Models/product.model";
 import {ProductsState, ProductsStateEnum} from "../../../ngrx/products.reducer";
 
